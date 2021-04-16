@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import {AppProvider, Card, Page} from '@shopify/polaris'
+import enTranslations from '@shopify/polaris/locales/en.json';
+import '@shopify/polaris/dist/styles.css';
 
+import {TaskForm} from './components/form';
+import {TaskList} from './components/list';
+
+const taskList = ['one', 'two', 'three'];
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProvider i18n={enTranslations}>
+      <Page title='Todo List'>
+        <Card>
+          <Card.Section>
+            <TaskForm/>
+          </Card.Section>
+          <Card.Section title='All Todos'>
+            <TaskList taskList={taskList}/>
+          </Card.Section>
+        </Card>
+      </Page>
+    </AppProvider>
   );
 }
 
