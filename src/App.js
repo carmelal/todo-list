@@ -5,14 +5,15 @@ import '@shopify/polaris/dist/styles.css';
 import {TaskForm} from './components/form';
 import {TaskList} from './components/list';
 
-const taskList = ['one', 'two', 'three'];
+var taskList = [];
+
 function App() {
   return (
     <AppProvider i18n={enTranslations}>
-      <Page title='Todo List'>
+      <Page title='Todo list'>
         <Card>
           <Card.Section>
-            <TaskForm/>
+            <TaskForm taskList={taskList}/>
           </Card.Section>
           <Card.Section title='All Todos'>
             <TaskList taskList={taskList}/>

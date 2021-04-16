@@ -1,7 +1,13 @@
-import {Form, FormLayout} from '@shopify/polaris';
+import {Form, FormLayout, TextStyle} from '@shopify/polaris';
 import {Task} from '../task';
 
 function TaskList({taskList}) {
+  if (!taskList.length) {
+    return (
+      <TextStyle variation='subdued'>No todo items</TextStyle>
+    );
+  }
+
   return (
     <Form>
       <FormLayout>
