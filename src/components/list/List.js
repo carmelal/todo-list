@@ -1,8 +1,12 @@
+import {useContext} from 'react';
 import {Form, FormLayout, TextStyle} from '@shopify/polaris';
 import {Task} from '../task';
 
-function TaskList({taskList}) {
-  if (!taskList.length) {
+function TaskList({ListContext}) {
+  const list = useContext(ListContext);
+  console.log(list);
+
+  if (!list.taskList.length) {
     return (
       <TextStyle variation='subdued'>No todo items</TextStyle>
     );
@@ -11,15 +15,15 @@ function TaskList({taskList}) {
   return (
     <Form>
       <FormLayout>
-        <div>
+        <>
         {
-          taskList.map((task) => {
+          list.taskList.map((task) => {
             return (
-              <Task task={task}/>
+              <Task task={task} key={task}/>
             );
           })
         }
-        </div>
+        </>
       </FormLayout>
     </Form>
   );
