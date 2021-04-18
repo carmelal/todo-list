@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react';
+import {AppProvider, Card, Page, VisuallyHidden, Heading} from '@shopify/polaris';
+import enTranslations from '@shopify/polaris/locales/en.json';
+import '@shopify/polaris/dist/styles.css';
+
+import {TaskForm} from './components/form';
+import {TaskList} from './components/list';
 
 function App() {
+  const [taskList, setTaskList] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProvider i18n={enTranslations}>
+      <Page title='Todo list'>
+        <Card>
+          <VisuallyHidden>
+            <Heading>Todo list</Heading>
+          </VisuallyHidden>
+          <Card.Section>
+            <VisuallyHidden>
+              <Heading>Add new todo</Heading>
+            </VisuallyHidden>
+            <TaskForm taskList={taskList} setTaskList={setTaskList}/>
+          </Card.Section>
+          <Card.Section title='All Todos'>
+            <TaskList taskList={taskList} setTaskList={setTaskList}/>
+          </Card.Section>
+        </Card>
+      </Page>
+    </AppProvider>
   );
 }
 
